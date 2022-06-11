@@ -1,13 +1,13 @@
 /** @format */
 
 module.exports = {
-  global: {
+  globals: {
     'ts-jest': {
       tsConfig: 'tsconfig.json',
     },
   },
   moduleFileExtentions: ['ts', 'js'],
-  tranform: {
+  transform: {
     '^.+\\.ts$': 'ts-jest',
   },
   testMatch: ['**/src/**/*.spec.ts'],
