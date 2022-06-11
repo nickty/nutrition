@@ -23,6 +23,7 @@ describe('Food', () => {
     expect(food.getBaseValues().carbohydrate).toEqual(40);
     expect(food.getBaseValues().protein).toEqual(65);
     expect(food.getBaseValues().calories).toEqual(124);
+    expect(food.getCurrentValues()).toEqual(food.getBaseValues());
   });
 
   test('create food with empty name', () => {
@@ -49,5 +50,34 @@ describe('Food', () => {
     expect(() => new Food('rice', 'g', baseValue)).toThrowError(
       InvalidFoodAmountError
     );
+  });
+
+  test('create food and change amoutn', () => {
+    const baseValue = {
+      amount: 100,
+      fat: 30,
+      carbohydrate: 40,
+      protein: 65,
+      calories: 124,
+    };
+
+    const food = new Food('price', 'g', baseValue);
+    food.changeAmout(23);
+
+    expect(food.getCurrentValues().amount).toEqual(23);
+  });
+
+  test('create food and change amount with ngative number', () => {
+    const baseValue = {
+      amount: 100,
+      fat: 30,
+      carbohydrate: 40,
+      protein: 65,
+      calories: 124,
+    };
+
+    const food = new Food('price', 'g', baseValue);
+
+    expect(food.changeAmout(-23)).toThrowError(InvalidFoodAmountError);
   });
 });

@@ -6,18 +6,21 @@ import Nutritions from './Nutritions';
 
 /** @format */
 class Food {
+  private currentValeus: Nutritions;
+
   constructor(
     private readonly name: string,
     private readonly unit: string,
     private readonly baseValues: Nutritions
   ) {
     this.newMethod(name);
-    this.newMethod_1(baseValues);
+    this.validateFoodAmount(baseValues.amount);
+    this.currentValeus = { ...baseValues };
   }
 
-  private newMethod_1(baseValues: Nutritions) {
-    if (baseValues.amount <= 0) {
-      throw new InvalidFoodAmountError(baseValues.amount);
+  private validateFoodAmount(amount: number) {
+    if (amount <= 0) {
+      throw new InvalidFoodAmountError(amount);
     }
   }
 
@@ -37,6 +40,15 @@ class Food {
 
   getBaseValues(): Nutritions {
     return this.baseValues;
+  }
+
+  getCurrentValues(): Nutritions {
+    return this.currentValeus;
+  }
+
+  changeAmout(amount: number) {
+    this.validateFoodAmount(amount);
+    this.currentValeus.amount = amount;
   }
 }
 
