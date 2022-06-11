@@ -1,6 +1,7 @@
 /** @format */
 
 import EmptyFoodNameError from './error/EmptyFoodNameError';
+import InvalidFoodAmountError from './error/InvalidFoodAmountError';
 import Food from './Food';
 
 describe('Food', () => {
@@ -34,5 +35,19 @@ describe('Food', () => {
     };
 
     expect(() => new Food('', 'g', baseValue)).toThrowError(EmptyFoodNameError);
+  });
+
+  test('Create food with zeo amount', () => {
+    const baseValue = {
+      amount: 0,
+      fat: 30,
+      carbohydrate: 40,
+      protein: 65,
+      calories: 124,
+    };
+
+    expect(() => new Food('rice', 'g', baseValue)).toThrowError(
+      InvalidFoodAmountError
+    );
   });
 });
